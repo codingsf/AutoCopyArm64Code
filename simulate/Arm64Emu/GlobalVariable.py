@@ -9,6 +9,6 @@ class GlobalVariable(object):
 
 
     def modify(self, uc_, addr_, size_, value_):
-        if addr_ == 0x5EE3018128:
+        if addr_ == 0x5C140:
             uc_.mem_write(addr_, struct.pack("<q", addr_))
             value_ = addr_

@@ -26,10 +26,10 @@ def test():
         data = fr.read()
         datalen = len(data)
 
-    nsProf = Profile(path, 0x5EE3000000, 0x5EE4000000, 0x1000, 0x2000, 0x690000)
+    nsProf = Profile(path, 0x5000, 0x500000, 0x1000, 0x700000, 0x50000)
 
     # Emulate code
-    res = Emulator().emulate(nsProf, 0x5EE3000000, datalen / 4 + 1)
+    res = Emulator().emulateKeyFunc(nsProf, 0x44018, datalen / 4 - 1)
 
     # Display resulting data
 

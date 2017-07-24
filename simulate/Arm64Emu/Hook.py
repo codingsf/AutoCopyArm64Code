@@ -7,6 +7,7 @@ from Decompile import *
 from Emulator import *
 from UcReadModify import *
 from UcWriteModify import *
+from UcInstModify import *
 
 import binascii
 
@@ -40,8 +41,12 @@ class Hook(object):
         else:
             Emulator().stopEmu(uc_, "Unknown exception![%u]" % (intno_))
 
+
     def hookCode(self, uc_, addr_, size_, userdata_):
         pc = uc_.reg_read(UC_ARM64_REG_PC)
+
+        UcInstModify().modify(uc_, pc, addr_, size_)
+        #Util().dumpData(uc_, 0, 0)
         inst = uc_.mem_read(pc, 4)
         inst = binascii.unhexlify(binascii.b2a_hex(inst))
         asm = Decompile().disasm(inst)
